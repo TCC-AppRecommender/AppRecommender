@@ -1,4 +1,7 @@
+#!/usr/bin/env python
+
 from setuptools import setup, find_packages
+
 
 setup(
     name='apprecommender',
@@ -11,4 +14,14 @@ setup(
     packages=find_packages(),
     setup_requires=['nose>=1.3', 'mock'],
     test_suite='nose.collector',
-    )
+    package_data={
+        '': [
+            '*.sh', 'bin/*.sh'
+        ]
+    },
+    entry_points={
+        'console_scripts': [
+            'apprec = bin.apprec:main',
+        ]
+    },
+)

@@ -84,7 +84,7 @@ def run():
         return run_apprecommender(load_options.options)
 
 
-if __name__ == '__main__':
+def main():
     result = run()
 
     if result is ERROR_INIT:
@@ -95,3 +95,7 @@ if __name__ == '__main__':
         print "\n"
         print "Please, run Machine Learning Training"
         print "Run: apprec.py --train"
+
+
+if __name__ == '__main__':
+    main()

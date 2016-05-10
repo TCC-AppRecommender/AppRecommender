@@ -13,3 +13,5 @@ src/web/submissions/
 *.swp
 apprecommender.egg-info/
 src/tests/test_data/.sample_axi/
+build/
+dist/

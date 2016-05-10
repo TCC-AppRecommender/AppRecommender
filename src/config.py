@@ -45,14 +45,13 @@ class Config(Singleton):
             logging.error("Error in config file syntax: %s", str(err))
             os.abort()
         if not hasattr(self, 'initialized'):
-            # general options
-            self.debug = 0
-            self.verbose = 1
-            self.output = "apprec.log"
-
             # data_source options
             self.base_dir = os.path.expanduser('~/.app-recommender')
             self.user_data_dir = os.path.join(self.base_dir, "user_data/")
+            # general options
+            self.debug = 0
+            self.verbose = 1
+            self.output = os.path.join(self.base_dir, "apprec.log")
             # filters for valid packages
             self.filters_dir = os.path.join(self.base_dir, "filters")
             self.pkgs_filter = os.path.join(self.filters_dir, "desktopapps")
@@ -199,6 +198,8 @@ class Config(Singleton):
         console_handler.setLevel(log_level)
         self.logger.addHandler(console_handler)
 
+        if not os.path.exists(self.base_dir):
+            os.makedirs(self.base_dir)
         file_handler = logging.handlers.RotatingFileHandler(self.output,
                                                             maxBytes=50000000,
                                                             backupCount=5)

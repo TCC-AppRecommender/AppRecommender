@@ -4,14 +4,17 @@ Priority: extra
 Maintainer: Tiago Bortoletto Vaz <tiago@debian.org>
 Uploaders: Tássia Camões Araújo <tassia@gmail.com>
 Dm-Upload-Allowed: yes
-Build-Depends: debhelper (>= 7)
+Build-Depends: debhelper (>= 7),
+               dh-python,
+               python2.7,
+               python-setuptools
 Standards-Version: 3.9.2
 Homepage: http://recommender.debian.net
 Vcs-Browser: https://github.com/tassia/AppRecommender
 Vcs-Git: git://github.com/tassia/AppRecommender.git
 
 Package: apprecommender
-Architecture: all
+Architecture: amd64
 Depends: python, python-xapian, python-apt, python-cluster, python-simplejson,
  python-numpy, apt-xapian-index, app-install-data, python-xdg
 Recommends: python-webpy
