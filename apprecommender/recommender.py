@@ -84,6 +84,10 @@ class Recommender:
             # self.popcon_programs = xapian.Database(cfg.popcon_programs)
             self.popcon_desktopapps = xapian.Database(
                 self.cfg.popcon_desktopapps)
+        if self.cfg.knn:
+            # self.popcon_programs = xapian.Database(cfg.popcon_programs)
+            self.knn_desktopapps = xapian.Database(
+                self.cfg.knn_desktopapps)
         # Load valid programs, desktopapps and tags
         # format: one package or tag name per line
         # self.valid_programs = []
@@ -112,6 +116,7 @@ class Recommender:
         """
         Set the recommendation strategy.
         """
+        self.strategy = None
         if k:
             k_neighbors = k
         else:
@@ -123,14 +128,15 @@ class Recommender:
         logging.info("Setting recommender strategy to \'%s\'" % strategy_str)
         # Check if collaborative strategies can be instanciated
         if "knn" in strategy_str:
-            if not self.cfg.popcon:
+            if not self.cfg.knn:
                 logging.info("Cannot perform collaborative strategy")
+                exit(1)
                 return 1
         # if self.cfg.pkgs_filter.split("/")[-1] == "desktopapps":
         self.items_repository = self.axi_desktopapps
         self.valid_pkgs = self.valid_desktopapps
         if "knn" in strategy_str:
-            self.users_repository = self.popcon_desktopapps
+            self.users_repository = self.knn_desktopapps
         # else:
         #    self.items_repository = self.axi_programs
         #    self.valid_pkgs = self.valid_programs
