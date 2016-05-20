@@ -67,6 +67,14 @@ def call_training(options):
     return False
 
 
+def call_initialize_knn(options):
+    for option, _ in options:
+        if option in ("-k", "--initknn"):
+            return True
+
+    return False
+
+
 def run():
     load_options = LoadOptions()
     load_options.load()
@@ -81,6 +89,10 @@ def run():
         MachineLearning.train(MachineLearningBVA)
         MachineLearning.train(MachineLearningBOW)
         return SUCCESS
+    elif call_initialize_knn(load_options.options):
+        print "Initializing collaborative data"
+        initialize = Initialize()
+        initialize.indexer_knn()
     else:
         return run_apprecommender(load_options.options)
 

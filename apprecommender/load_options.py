@@ -15,13 +15,13 @@ class LoadOptions(Singleton):
 
     def load(self):
         config = Config()
-        short_options = "hdvo:f:b:a:e:p:m:u:l:c:x:w:s:z:r:n:idvo:tdvo"
+        short_options = "hdvo:f:b:a:e:p:m:u:l:c:x:w:s:z:r:n:idvo:tdvo:kdvo"
         long_options = ["help", "debug", "verbose", "output=", "filtersdir=",
                         "pkgsfilter=", "axi=", "dde=", "popconindex=",
                         "popcondir=", "indexmode=", "clustersdir=",
                         "kmedoids=", "maxpopcon=", "weight=", "strategy=",
                         "profile_size=", "profiling=", "neighbors=", "init",
-                        "train"]
+                        "train", "initknn"]
         try:
             opts, args = getopt.getopt(sys.argv[1:], short_options,
                                        long_options)
@@ -75,6 +75,8 @@ class LoadOptions(Singleton):
             elif o in ("-i", "--init"):
                 continue
             elif o in ("-t", "--train"):
+                continue
+            elif o in ("-k", "--initknn"):
                 continue
             else:
                 assert False, "unhandled option"
